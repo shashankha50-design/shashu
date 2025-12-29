@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Do You Love Me?</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      z-index: 2;
+    }
+
+    h1 { color: #ff4d6d; }
+
+    button {
+      padding: 12px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    #yesBtn { background: #ff4d6d; color: white; margin-right: 20px; }
+    #noBtn { background: #adb5bd; color: white; position: absolute; }
+
+    .hidden {
+      display: none;
+      font-size: 26px;
+      color: #ff4d6d;
+      margin-top: 20px;
+    }
+
+    .cracker {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: explode 1.5s linear forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(15); opacity: 0; }
+    }
+
+    a { color: #ff4d6d; font-weight: bold; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container" id="box">
+    <h1>Do you love me? ❤️</h1>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+    <div id="msg" class="hidden">I love you too puttuuu 💗<br><br>
+      <a href="https://www.instagram.com/direct/inbox/" target="_blank">💌 Message me on Instagram</a>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const msg = document.getElementById('msg');
+    const box = document.getElementById('box');
+
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    });
+
+    function crackers() {
+      for (let i = 0; i < 80; i++) {
+        const c = document.createElement('div');
+        c.className = 'cracker';
+        c.style.left = Math.random() * window.innerWidth + 'px';
+        c.style.top = Math.random() * window.innerHeight + 'px';
+        c.style.background = `hsl(${Math.random()*360},100%,60%)`;
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 1500);
+      }
+    }
+
+    yesBtn.addEventListener('click', () => {
+      const music = document.getElementById('bgMusic');
+      music.play();
+      crackers();
+      msg.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
